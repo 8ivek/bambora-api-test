@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "f419fc33-d8fa-4d1b-9eaa-d82ff0f201a9",
+		"name": "Bambora: Create a Transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tokenize a card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"number\":\"4030000010001234\",\n\t\"expiry_month\":\"12\",\n\t\"expiry_year\":\"20\",\n\t\"cvd\":\"123\"\n}"
+				},
+				"url": {
+					"raw": "https://api.na.bambora.com/scripts/tokenization/tokens",
+					"protocol": "https",
+					"host": [
+						"api",
+						"na",
+						"bambora",
+						"com"
+					],
+					"path": [
+						"scripts",
+						"tokenization",
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Do Payment (Token)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Passcode ..."
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"order_number\": \"1234567890\",\r\n\t\"amount\" : 100.00,\r\n\t\"payment_method\" : \"token\",\r\n\t\"token\" : {\r\n\t\t\"complete\" : \"true\",\r\n\t\t\"code\" : \"a11-92d21d2a-2e76-4acc-91f8-9acf81b9698d\",\r\n\t\t\"name\" : \"John Doe\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://api.na.bambora.com/v1/payments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"na",
+						"bambora",
+						"com"
+					],
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Do Payment (Card)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Passcode ..."
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"order_number\": \"6873216374651648651687\",\r\n\t\"amount\" : 100.00,\r\n\t\"payment_method\" : \"card\",\r\n\t\"card\" : {\r\n\t\t\"number\" : \"4030000010001234\",\r\n\t\t\"name\" : \"John Doe\",\r\n\t\t\"expiry_month\" : \"10\",\r\n\t\t\"expiry_year\" : \"20\",\r\n\t\t\"cvd\" : \"123\",\r\n\t\t\"complete\": \"true\"\r\n\t},\r\n\t\"billing\": {\r\n\t\t\"name\": \"John Doe\",\r\n\t\t\"address_line1\": \"1407 Graymalkin Lane\",\r\n\t\t\"address_line2\": \"\",\r\n\t\t\"city\": \"Toronto\",\r\n\t\t\"province\": \"ON\",\r\n\t\t\"country\": \"CAN\",\r\n\t\t\"postal_code\": \"111 111\",\r\n\t\t\"phone_number\": \"1234567890\",\r\n\t\t\"email_address\": \"johndoe@yourmail.com\"\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "https://api.na.bambora.com/v1/payments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"na",
+						"bambora",
+						"com"
+					],
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "void a Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Passcode ..."
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 62.00,\n\t\"order_number\": \"1d08fcfe42160054f7b4fe3518999debe9d5e3957d4c\"\n}"
+				},
+				"url": {
+					"raw": "https://api.na.bambora.com/v1/payments/10000039/void",
+					"protocol": "https",
+					"host": [
+						"api",
+						"na",
+						"bambora",
+						"com"
+					],
+					"path": [
+						"v1",
+						"payments",
+						"10000039",
+						"void"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refund a Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Passcode ..."
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 62.00,\n\t\"order_number\": \"a0bd6e77985bb69ffbdba45b23b635609c85f6fc4490\"\n}"
+				},
+				"url": {
+					"raw": "https://api.na.bambora.com/v1/payments/10000040/returns",
+					"protocol": "https",
+					"host": [
+						"api",
+						"na",
+						"bambora",
+						"com"
+					],
+					"path": [
+						"v1",
+						"payments",
+						"10000040",
+						"returns"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
