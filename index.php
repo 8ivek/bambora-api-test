@@ -24,12 +24,12 @@ $card = array(
     'cvd'           => '123',
 );
 
-$token_url = ROOT_URL.'scripts/tokenization/tokens';
-$profile_url = ROOT_URL.'v1/profiles';
-$payment_url = ROOT_URL.'v1/payments';
+$token_url      =   BAMBORA_ROOT_URL.'scripts/tokenization/tokens';
+$profile_url    =   BAMBORA_ROOT_URL.'v1/profiles';
+$payment_url    =   BAMBORA_ROOT_URL.'v1/payments';
 
 $curlConnection = new CurlConnection($token_url);
-$bambora = new Bambora($curlConnection,$card);
+$bambora = new Bambora($curlConnection,$card,$bambora_merchant_id,$bambora_passcode);
 $token = $bambora->getToken();
 echo "Token Successfully Generated: $token\n";
 
@@ -52,7 +52,7 @@ $payment_data = array(
 );
 
 $curlConnection = new CurlConnection($payment_url);
-$bambora = new Bambora($curlConnection,$payment_data);
+$bambora = new Bambora($curlConnection,$payment_data,$bambora_merchant_id,$bambora_passcode);
 $payment_details = $bambora->doPayment();
 echo "Successful Token Payment\n";
 //print_r($payment_details);die();
@@ -91,7 +91,7 @@ $payment_data = array(
 );
 
 $curlConnection = new CurlConnection($payment_url);
-$bambora = new Bambora($curlConnection,$payment_data);
+$bambora = new Bambora($curlConnection,$payment_data,$bambora_merchant_id,$bambora_passcode);
 $payment_details = $bambora->doPayment();
 
 echo "Successful Card Payment\n";

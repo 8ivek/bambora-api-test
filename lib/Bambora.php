@@ -6,10 +6,25 @@ namespace bambora;
 class Bambora
 {
     var $connection;
+    var $mid; // Bambora MerchantID
+    var $passcode; // Bambora Passcode
 
-    function __construct($curlConnection,$data){
+    function __construct($curlConnection,$data,$merchant_id,$passcode){
+
+        $this->setMerchantId($merchant_id);
+        $this->setPasscode($passcode);
+
         $this->connection = $curlConnection;
         $this->connection->setData(json_encode($data));
+        $this->connection->setHeaders($this->mid,$this->passcode);
+    }
+
+    public function setMerchantId($mid){
+        $this->mid = $mid;
+    }
+
+    public function setPasscode($passcode){
+        $this->passcode = $passcode;
     }
 
     public function getToken(){

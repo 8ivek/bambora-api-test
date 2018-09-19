@@ -9,10 +9,10 @@ Test your Bambora custom checkout api
 ## content of config.php file
 ```
 <?php
-const MERCHANTID = '***your merchant id***';
-const PASSCODE = '***your pass code***';
-const ROOT_URL = 'https://api.na.bambora.com/';
-const LOG_FILE = 'bambora_events.log';
+$bambora_merchant_id    =   '***your merchant id***';
+$bambora_passcode       =   '***your pass code***';
+const BAMBORA_ROOT_URL  =   'https://api.na.bambora.com/';
+const BAMBORA_LOG_FILE  =   'bambora_events.log';
 ```
 ## Further more: config file location and config file content
 ![Config File Location](https://raw.githubusercontent.com/8ivek/bambora-api-test/master/images/config_file_location.jpg)

@@ -12,15 +12,11 @@ class CurlConnection
     var $data;
     var $logger;
 
-    public function __construct($url,  $timeout = 10)
+    public function __construct($url, $timeout = 10)
     {
         $this->url = str_replace( "&amp;", "&", urldecode(trim($url)) );
-        $this->headers = array(
-            'Content-Type: application/json; charset=utf-8',
-            'Authorization: Passcode '. base64_encode(MERCHANTID.':'.PASSCODE),
-        );
         $this->timeout = $timeout;
-        $this->logger = new Logger(LOG_FILE);
+        $this->logger = new Logger(BAMBORA_LOG_FILE);
     }
 
     public function post_to_url(){
@@ -48,5 +44,12 @@ class CurlConnection
 
     public function setData($data){
         $this->data=$data;
+    }
+
+    public function setHeaders($mid,$passcode){
+        $this->headers = array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Passcode '. base64_encode($mid.':'.$passcode),
+        );
     }
 }
